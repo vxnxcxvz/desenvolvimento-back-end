@@ -1,117 +1,337 @@
-# Sistema de Gestão Hospitalar e de Serviços de Saúde (SGHSS)
+# 🏥 Plataforma Web de Suporte ao Cuidado do Idoso - API REST
 
-Projeto do **Sistema de Gestão Hospitalar e de Serviços de Saúde (SGHSS)** desenvolvido para a disciplina de **Projeto Multidisciplinar** do curso de **Análise e Desenvolvimento de Sistemas** da UNINTER.  Este repositório contém exclusivamente a **camada de back‑end**, escrita em Node.js/Express e persistida em PostgreSQL.
+![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
+![Express](https://img.shields.io/badge/Express-4.18-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Prisma](https://img.shields.io/badge/Prisma-5.8-purple)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-O objetivo da aplicação é integrar cadastros de pacientes, profissionais de saúde e agendamentos de consultas, além de permitir o gerenciamento de prontuários eletrônicos, prescrições e módulos administrativos de um hospital ou clínica.  Todos os endpoints foram implementados seguindo o estilo RESTful, com autenticação via JWT e boas práticas de segurança e LGPD.
+API REST completa para gestão do cuidado ao idoso, integrável ao Sistema de Gestão Hospitalar e de Serviços de Saúde (SGHSS) da instituição VidaPlus.
 
-> **Atenção**: este README se baseia no relatório final do projeto; preencha os campos indicados como `[PENDENTE]` com informações reais do seu código ou forneça os artefatos necessários (diagramas, prints, coleção Postman, etc.) no diretório `docs/` descrito abaixo.
+## 📋 Sobre o Projeto
 
-## Tecnologias utilizadas
+Este projeto implementa o back-end de uma plataforma web focada no suporte ao cuidado do idoso, contemplando:
 
-- **Node.js** (versão 18 ou superior)
-- **Express.js** – framework minimalista para APIs REST
-- **TypeScript** (se aplicável)  
-- **PostgreSQL** – banco de dados relacional
-- **JWT / bcrypt** – autenticação e segurança
-- **Prisma ou Sequelize** – ORM para acesso ao banco (conforme implementado)
-- **Jest / Supertest** – testes unitários e de integração
+- ✅ Autenticação segura com JWT e hash bcrypt
+- ✅ Controle de acesso baseado em perfis (RBAC)
+- ✅ CRUD completo de pacientes idosos
+- ✅ Sistema de agendamento de consultas com validação de disponibilidade
+- ✅ Registro de prontuários médicos
+- ✅ Emissão de prescrições
+- ✅ Sistema de notificações
+- ✅ Relatórios administrativos
+- ✅ Auditoria de ações sensíveis (compliance LGPD)
+- ✅ Logs estruturados com Winston
 
-## Como executar
+## 🚀 Tecnologias Utilizadas
 
-1. **Clone o repositório** e entre na pasta do projeto:
+### Core
+- **Node.js** v20.11.0 LTS - Runtime JavaScript
+- **Express.js** v4.18.2 - Framework web
+- **TypeScript** v5.3.3 - Type safety
 
-   ```bash
-   git clone https://github.com/vxnxcxvz/sghss-idoso-api.git
-   cd sghss-idoso-api
-   ```
+### Banco de Dados
+- **PostgreSQL** v16.1 - SGBD relacional
+- **Prisma** v5.8.1 - ORM type-safe com migrations
 
-2. **Instale as dependências**:
+### Autenticação e Segurança
+- **jsonwebtoken** v9.0.2 - Geração e validação de JWT
+- **bcrypt** v5.1.1 - Hash seguro de senhas
+- **Zod** v3.22.4 - Validação de schemas
 
-   ```bash
-   npm install
-   ```
+### Observabilidade
+- **Winston** v3.11.0 - Logging estruturado
 
-3. **Configure as variáveis de ambiente** criando um arquivo `.env` a partir do modelo `.env.example` (forneça seu host, porta, nome de banco, usuário, senhas, chaves JWT, etc.):
+### Desenvolvimento
+- **ts-node** v10.9.2 - Execução TypeScript
+- **nodemon** v3.0.2 - Hot reload
+- **Postman** v10.20.0 - Testes de API
 
-   ```bash
-   cp .env.example .env
-   # edite .env com seus dados
-   ```
-
-4. **Execute as migrações do banco de dados** (ajuste o comando conforme o ORM utilizado – Prisma ou Sequelize):
-
-   ```bash
-   npm run migrate
-   ```
-
-5. **Inicie a aplicação** em modo de desenvolvimento:
-
-   ```bash
-   npm run dev
-   ```
-
-   A API deverá estar disponível em `http://localhost:3000` e a documentação (Swagger/OpenAPI) em `http://localhost:3000/api-docs`, se configurada.
-
-## Estrutura de pastas (exemplo)
+## 📦 Estrutura do Projeto
 
 ```
-sghss-idoso-api/
-├── src/                # Código‑fonte da API (controllers, services, repositories, models)
-│   ├── controllers/
-│   ├── services/
-│   ├── repositories/
-│   ├── models/
-│   ├── middlewares/
-│   ├── routes/
-│   └── server.ts       # Arquivo de inicialização do Express
-├── docs/               # Documentos de apoio (ver seção Docs abaixo)
-│   ├── diagramas/      # Diagramas UML/DER (inserir arquivos .png ou .pdf)
-│   ├── postman/        # Coleção e prints dos testes no Postman
-│   ├── endpoints/      # Documentação detalhada de cada rota, se não usar Swagger
-│   └── relatorio/      # Relatório final em PDF/DOCX
-├── .env.example        # Exemplo de variáveis de ambiente
-├── package.json        # Dependências e scripts
-├── tsconfig.json       # Configurações TypeScript (se usar TS)
-└── README.md           # Este arquivo
+desenvolvimento-back-end/
+├── src/
+│   ├── app.ts                      # Configuração do Express
+│   ├── server.ts                   # Inicialização do servidor
+│   ├── routes/                     # Definição de rotas
+│   ├── controllers/                # Lógica de controle
+│   ├── services/                   # Regras de negócio
+│   ├── repositories/               # Acesso a dados (Prisma)
+│   ├── middlewares/                # Auth, RBAC, validation, logs
+│   ├── utils/                      # Funções auxiliares
+│   ├── types/                      # Definições TypeScript
+│   └── config/                     # Configurações
+├── prisma/
+│   ├── schema.prisma               # Schema do banco
+│   └── migrations/                 # Histórico de migrações
+├── docs/
+│   ├── openapi.yaml                # Documentação OpenAPI
+│   └── postman_collection.json     # Coleção Postman
+├── .env.example                    # Template de variáveis
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-Se o código‑fonte ainda estiver compactado em um arquivo `.zip`, extraia o conteúdo para dentro do diretório `src/` e remova o `.zip` do repositório.  Caso contrário, marque uma pendência para descompactar.
+## 🛠️ Instalação e Configuração
 
-## Endpoints principais
+### Pré-requisitos
 
-A seguir, uma tabela resumida com os principais endpoints que foram implementados.  **Inclua somente as rotas que você de fato possui em seu código**; ajuste, adicione ou remova conforme necessário.
+- Node.js v20.x ou superior
+- PostgreSQL v16.x
+- npm ou yarn
 
-| Método | Rota                         | Descrição                                   | Autenticação | Códigos HTTP |
-|-------:|------------------------------|---------------------------------------------|-------------:|--------------|
-| POST   | `/api/v1/auth/login`         | Autentica um usuário e retorna token JWT    | Não          | 200, 401     |
-| POST   | `/api/v1/auth/register`      | Cadastra um novo usuário                    | Não          | 201, 400     |
-| GET    | `/api/v1/pacientes`          | Lista pacientes (paginado)                  | Sim          | 200, 401     |
-| GET    | `/api/v1/pacientes/{id}`     | Obtém detalhes de um paciente               | Sim          | 200, 404     |
-| POST   | `/api/v1/pacientes`          | Cria paciente                               | Sim (admin)  | 201, 400     |
-| PUT    | `/api/v1/pacientes/{id}`     | Atualiza dados do paciente                  | Sim          | 200, 400     |
-| DELETE | `/api/v1/pacientes/{id}`     | Remove paciente (soft delete)               | Sim          | 200, 400     |
-| POST   | `/api/v1/consultas`          | Agenda nova consulta                        | Sim          | 201, 400     |
-| GET    | `/api/v1/consultas`          | Lista consultas do usuário                  | Sim          | 200, 401     |
-| DELETE | `/api/v1/consultas/{id}`     | Cancela consulta                            | Sim          | 200, 400     |
-| ...    | ...                          | ...                                         | ...          | ...          |
+### Passo a Passo
 
-> **[PENDENTE]** Caso o projeto possua outras rotas (prontuários, prescrições, exames, profissionais, auditoria), adicione‑as aqui com método, URL, descrição, se requer autenticação e os códigos de retorno esperados.
+1. **Clone o repositório**
+```bash
+git clone https://github.com/vxnxcxvz/desenvolvimento-back-end.git
+cd desenvolvimento-back-end
+```
 
-## Docs e evidências
+2. **Instale as dependências**
+```bash
+npm install
+```
 
-Todo o material adicional do trabalho deve ficar dentro do diretório `docs/` para facilitar a avaliação:
+3. **Configure as variáveis de ambiente**
+```bash
+cp .env.example .env
+```
 
-- `docs/diagramas/`: inclua os diagramas de Casos de Uso, Modelo ER e Diagrama de Classes em formato imagem ou PDF.  Use nomes de arquivo claros (ex.: `casos_de_uso.png`, `der.png`, `classes.png`).
-- `docs/postman/`: inclua a coleção exportada do Postman (ex.: `collection.json`) e prints das requisições de testes (ex.: `CT01_login.png`, `CT02_criar_paciente.png`).
-- `docs/endpoints/`: se a API não tiver documentação Swagger hospedada, crie aqui um arquivo `endpoints.md` detalhando cada rota (método, URL, parâmetros, exemplos de requisição e resposta, códigos de erro). Caso utilize Swagger/OpenAPI, referencie o link da documentação no seu relatório e README.
-- `docs/relatorio/`: coloque o relatório final em PDF (por exemplo, `SGHSS_project_report.pdf`) para referência.
+Edite o arquivo `.env` com suas configurações:
+```env
+# Banco de Dados
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/sghss_vidaplus"
 
-Caso ainda não tenha esses materiais, crie um arquivo de texto ou Markdown com a marcação `[PENDENTE]` explicando o que falta fornecer.
+# JWT
+JWT_SECRET="seu_secret_super_seguro_aqui_minimo_32_caracteres"
+JWT_EXPIRES_IN="1h"
 
-## Licença
+# Servidor
+PORT=3000
+NODE_ENV="development"
 
-[LICENÇA PENDENTE] – Defina aqui a licença de uso (ex.: MIT, GPL, Apache) ou remova esta seção se não desejar licenciar publicamente.
+# Logs
+LOG_LEVEL="info"
+```
 
-## Contribuições
+4. **Execute as migrations do banco**
+```bash
+npx prisma migrate dev
+```
 
-Este projeto foi desenvolvido como trabalho acadêmico e não se encontra aberto a contribuições externas no momento.  Sugestões de melhorias podem ser feitas via issues ou contato direto com o autor.
+5. **(Opcional) Popule o banco com dados de teste**
+```bash
+npx prisma db seed
+```
+
+6. **Inicie o servidor**
+```bash
+# Desenvolvimento (com hot reload)
+npm run dev
+
+# Produção
+npm run build
+npm start
+```
+
+O servidor estará rodando em `http://localhost:3000`
+
+## 📚 Documentação da API
+
+### Swagger/OpenAPI
+
+Acesse a documentação interativa em:
+```
+http://localhost:3000/api-docs
+```
+
+### Postman Collection
+
+Importe a coleção do Postman localizada em:
+```
+docs/postman_collection.json
+```
+
+### Endpoints Principais
+
+#### Autenticação
+- `POST /auth/signup` - Cadastro de usuário
+- `POST /auth/login` - Login e obtenção de token JWT
+
+#### Pacientes
+- `POST /pacientes` - Cadastrar paciente
+- `GET /pacientes` - Listar pacientes (paginado)
+- `GET /pacientes/:id` - Buscar paciente por ID
+- `PUT /pacientes/:id` - Atualizar paciente
+- `DELETE /pacientes/:id` - Remover paciente (ADMIN only)
+
+#### Consultas
+- `POST /consultas` - Agendar consulta
+- `GET /consultas` - Listar consultas (com filtros)
+- `PATCH /consultas/:id/cancelar` - Cancelar consulta
+
+#### Prontuários
+- `POST /prontuarios` - Registrar prontuário
+- `GET /prontuarios` - Listar prontuários
+
+#### Prescrições
+- `POST /prescricoes` - Emitir prescrição
+- `GET /prescricoes` - Listar prescrições
+
+#### Notificações
+- `POST /notificacoes` - Enviar notificação
+- `GET /notificacoes` - Listar notificações
+
+#### Relatórios
+- `GET /relatorios/consultas` - Relatório de consultas (ADMIN only)
+
+## 🔐 Autenticação e Autorização
+
+### JWT (JSON Web Token)
+
+Todas as rotas (exceto signup/login) exigem autenticação via JWT no header:
+```
+Authorization: Bearer {seu_token_aqui}
+```
+
+### Perfis (RBAC)
+
+- **ADMIN**: Acesso completo ao sistema
+- **PROFISSIONAL**: Gerencia pacientes, consultas, prontuários, prescrições
+- **PACIENTE**: Visualiza próprios dados e histórico
+- **CUIDADOR**: Visualiza dados de pacientes vinculados
+
+## 🧪 Testes
+
+### Testes Manuais (Postman)
+
+1. Importe a coleção `docs/postman_collection.json`
+2. Configure a variável `{{baseUrl}}` para `http://localhost:3000`
+3. Execute a pasta "Auth" → "Login" para obter o token
+4. O token será automaticamente salvo na variável `{{token}}`
+5. Execute os demais testes
+
+### Casos de Teste Documentados
+
+O projeto inclui 13 casos de teste formais:
+- CT01: Sign-up válido
+- CT02: Login válido
+- CT03: Login inválido
+- CT04: Cadastrar paciente válido
+- CT05: Cadastrar paciente sem CPF
+- CT06: Listar pacientes
+- CT07: Agendar consulta
+- CT08: Conflito de agenda
+- CT09: Cancelar consulta
+- CT10: Registrar prontuário
+- CT11: Emitir prescrição
+- CT12: Acesso sem token
+- CT13: RBAC bloqueio
+
+## 📊 Diagrama de Arquitetura
+
+```
+┌─────────────┐
+│   Client    │
+└──────┬──────┘
+       │ HTTP Request
+       ▼
+┌─────────────────────────────────────┐
+│         Express Middleware          │
+├─────────────────────────────────────┤
+│  Logger → Auth → RBAC → Validation  │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────┐      ┌──────────────┐
+│ Controllers │ ───> │   Services   │
+└─────────────┘      └──────┬───────┘
+                            │
+                            ▼
+                     ┌──────────────┐
+                     │ Repositories │
+                     └──────┬───────┘
+                            │
+                            ▼
+                     ┌──────────────┐
+                     │    Prisma    │
+                     └──────┬───────┘
+                            │
+                            ▼
+                     ┌──────────────┐
+                     │  PostgreSQL  │
+                     └──────────────┘
+```
+
+## 🔒 Segurança e Compliance
+
+### LGPD (Lei Geral de Proteção de Dados)
+
+- ✅ Minimização de dados (apenas campos necessários)
+- ✅ Hash bcrypt de senhas (salt rounds = 10)
+- ✅ Auditoria de ações sensíveis (prontuários, prescrições)
+- ✅ Logs estruturados com requestId
+- ✅ Soft delete (preparado para direito ao esquecimento)
+
+### Boas Práticas de Segurança
+
+- ✅ Validação rigorosa com Zod
+- ✅ Prepared statements via Prisma (proteção SQL Injection)
+- ✅ JWT com expiração de 1 hora
+- ✅ RBAC para controle de acesso granular
+- ✅ Mensagens de erro genéricas (não expõem detalhes internos)
+
+## 🚧 Melhorias Futuras
+
+- [ ] Implementar rate limiting (proteção contra força bruta)
+- [ ] Adicionar criptografia de campos sensíveis em repouso
+- [ ] Implementar cache com Redis
+- [ ] Criar suite de testes automatizados (Jest + Supertest)
+- [ ] Configurar CI/CD pipeline (GitHub Actions)
+- [ ] Deploy em cloud (AWS/Azure/GCP)
+- [ ] Integração com plataforma de videochamada (telemedicina completa)
+- [ ] Integração com dispositivos IoT (wearables)
+- [ ] Machine Learning para predição de riscos de saúde
+
+## 👤 Autor
+
+**Vinícius Pereira Capacci**
+- RU: 4389297
+- Curso: Análise e Desenvolvimento de Sistemas
+- Instituição: UNINTER - Polo Santo André
+- GitHub: [@vxnxcxvz](https://github.com/vxnxcxvz)
+
+## 🎓 Projeto Acadêmico
+
+Este projeto foi desenvolvido como Trabalho de Conclusão da disciplina **Projeto Multidisciplinar** do curso de Análise e Desenvolvimento de Sistemas da UNINTER.
+
+**Professor Orientador:** Prof. Winston Sen Lun Fung, Me.
+
+**Período:** 2025A1 (Fevereiro-Março 2026)
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+1. Fazer fork do projeto
+2. Criar uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
+4. Push para a branch (`git push origin feature/MinhaFeature`)
+5. Abrir um Pull Request
+
+## 📞 Suporte
+
+Para dúvidas ou sugestões, abra uma [issue](https://github.com/vxnxcxvz/desenvolvimento-back-end/issues) no repositório.
+
+---
+
+⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!
+
+**Desenvolvido com ❤️ para melhorar o cuidado ao idoso**
