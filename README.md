@@ -75,7 +75,7 @@ desenvolvimento-back-end/
 └── README.md
 ```
 
-## 🛠️ Instalação e Configuração
+## Instalação e Configuração
 
 ### Pré-requisitos
 
