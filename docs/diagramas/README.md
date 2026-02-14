@@ -1,5 +1,15 @@
-# Diagramas
+# Diagramas do SGHSS
 
-Este diretório deve conter os diagramas da arquitetura do sistema, casos de uso, DER e modelo de classes. Salve cada diagrama em formato PNG, JPG ou PDF e use nomes de arquivo descritivos, como `casos_de_uso.png`, `der.png` ou `classes.png`.
+## DER (Entidade-Relacionamento)
+1. Acesse https://dbdiagram.io/
+2. New Diagram
+3. Cole o conteúdo de `DER-code.dbml`
+4. Export -> PNG (High Resolution)
+5. Salve como `docs/diagramas/der.png`
 
-Se você ainda não possui os diagramas, marque no documento principal como [PENDENTE] e adicione os arquivos aqui quando estiverem prontos.
+## Casos de Uso (UML)
+Sugestão de atores: Paciente, Profissional, Administrador.
+Crie no https://app.diagrams.net/ e salve em `docs/diagramas/casos-de-uso.png`.
+
+## Diagrama de Classes (UML)
+Crie no https://app.diagrams.net/ e salve em `docs/diagramas/diagrama-classes.png`.
