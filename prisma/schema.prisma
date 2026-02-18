@@ -158,6 +158,7 @@ model Auditoria {
   @@map("auditoria")
 
 
+  }
 // Enum de tipos de usuario (RBAC)
 enum UserType {
   PACIENTE
