@@ -46,12 +46,4 @@ jobs:
         run: |
           chmod +x testes_seguros.sh
           ./testes_seguros.sh
-      - name: Commit evidences
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add docs/evidencias docs/RELATORIO-TESTES.md || true
-          git commit -m "ci: add evidences from workflow run" || true
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   
