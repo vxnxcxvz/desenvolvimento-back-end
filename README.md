@@ -33,9 +33,5 @@ GET /api/auth/me
 Documentos
 
 OpenAPI: docs/openapi.yaml
+Artefatos como coleção do Postman, diagramas e evidências podem ser gerados ao executar o script/CI; não ficam necessariamente versionados no repositório.
 
-Postman: docs/postman_collection.json
-
-Diagramas: docs/diagramas/
-
-Evidências: docs/screenshots/
