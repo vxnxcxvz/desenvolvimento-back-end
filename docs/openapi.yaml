@@ -32,6 +32,7 @@ components:
           type: string
     Usuario:
       type: object
+ 
       properties:
         id:
           type: integer
@@ -66,6 +67,7 @@ components:
           format: email
           example: joao@vidaplus.com
         senha:
+       
           type: string
           minLength: 6
           example: senha123
@@ -76,7 +78,7 @@ components:
           - PROFISSIONAL
           - PACIENTE
           - CUIDADOR
-          nulllable: true
+          nullable: true
         pacienteId:
           type: integer
           nullable: true
