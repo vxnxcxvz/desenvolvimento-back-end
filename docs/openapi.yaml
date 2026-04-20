@@ -76,15 +76,7 @@ components:
           - PROFISSIONAL
           - PACIENTE
           - CUIDADOR
-          nullable: true
-        tipo:
-          type: string
-          enum:
-          - PACIENTE
-          - MEDICO
-          - ENFERMEIRO
-          - ADMINISTRADOR
-          nullable: true
+          nulllable: true
         pacienteId:
           type: integer
           nullable: true
